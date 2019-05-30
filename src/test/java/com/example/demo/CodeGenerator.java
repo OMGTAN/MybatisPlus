@@ -68,7 +68,7 @@ public class CodeGenerator {
         PackageConfig pc = new PackageConfig();
 //        pc.setModuleName(scanner("模块名"));
         pc.setModuleName("sys");
-        pc.setParent("com.anji.tech");
+        pc.setParent("com.anji.tec");
         mpg.setPackageInfo(pc);
 
         // 自定义配置

@@ -1,0 +1,14 @@
+server:
+  port: 2525
+ 
+# 该配置的名称是固定的，不可以改变，否则将不能自动加载到数据源中
+spring:
+  datasource:
+    # 使用druid数据源
+#    type: com.alibaba.druid.pool.DruidDataSource
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.171.128:3306/mydb?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+
