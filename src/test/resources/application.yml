@@ -1,0 +1,12 @@
+basic_data:
+  dataBase: wms_basic_data
+  projectPath: D:/repos/temp2/wms-parent/wms-basic-data
+  moduleName: ""
+  mapperPath: ""
+  tableNames: basicData
+out_warehouse:
+  dataBase: wms_out_warehouse
+  projectPath: D:/repos/temp2/wms-parent/wms-out-warehouse
+  moduleName: ""
+  mapperPath: ""
+  tableNames: outWarehouse

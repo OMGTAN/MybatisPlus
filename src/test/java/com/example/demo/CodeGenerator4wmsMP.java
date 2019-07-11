@@ -28,6 +28,12 @@ public class CodeGenerator4wmsMP {
 	static  String SERVICE_NAME = ENTITY_NAME + "Service";
 	static  String SERVICE_IMPL_NAME = ENTITY_NAME + "Service" + "Impl";
 	static  String CONTROLLER_NAME = ENTITY_NAME + "Controller";
+	
+	
+	static String moduleName = "";//包名
+	static String mapperPath = "";//
+	static String dataBase = "wms_out_warehouse";
+	static String projectPath = "D:\\repos\\temp2\\wms-parent\\wms-out-warehouse";
     /**
      * <p>
      * 读取控制台内容
@@ -54,17 +60,7 @@ public class CodeGenerator4wmsMP {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
 //        String projectPath = System.getProperty("user.dir");
-        //主数据
-        String projectPath = "D:/repos/temp2/wms-parent/wms-basic-data";
-        String moduleName = "";
-        String mapperPath = "";
-//        String projectPath = "D:\\repos\\AnjiGit\\wms-parent\\wms-basic-data";
         
-        //出库
-//        String projectPath = "D:\\repos\\AnjiGit\\wms-parent\\wms-out-warehouse";
-//        String moduleName = "";//包名
-//        String mapperPath = "";//
-//        String projectPath = "D:\\repos\\temp2\\wms-parent\\wms-out-warehouse";
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("auto");
         gc.setOpen(false);
@@ -80,8 +76,7 @@ public class CodeGenerator4wmsMP {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://10.108.17.27:3306/wms_basic_data?useUnicode=true&useSSL=false&characterEncoding=utf8");
-//        dsc.setUrl("jdbc:mysql://10.108.17.27:3306/wms_out_warehouse?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://10.108.17.27:3306/"+dataBase+"?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
