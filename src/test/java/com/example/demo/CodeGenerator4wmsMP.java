@@ -20,8 +20,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 // 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
-public class CodeGenerator4wms {
-	
+public class CodeGenerator4wmsMP {
+
 	static String TABLE_NAME = "AM_ITEM";
 	static String ENTITY_NAME = "Item";
 	static  String MAPPER_NAME = ENTITY_NAME + "Mapper";
@@ -55,16 +55,16 @@ public class CodeGenerator4wms {
         GlobalConfig gc = new GlobalConfig();
 //        String projectPath = System.getProperty("user.dir");
         //主数据
-//        String projectPath = "D:/repos/temp/wms-basic-data";
-//        String moduleName = "basic.data";
-//        String mapperPath = "basic-data";
+        String projectPath = "D:/repos/temp2/wms-parent/wms-basic-data";
+        String moduleName = "";
+        String mapperPath = "";
 //        String projectPath = "D:\\repos\\AnjiGit\\wms-parent\\wms-basic-data";
         
-        //
-        String projectPath = "D:\\repos\\AnjiGit\\wms-parent\\wms-out-warehouse";
-        String moduleName = "out.warehouse";
-        String mapperPath = "out-warehouse";
-        
+        //出库
+//        String projectPath = "D:\\repos\\AnjiGit\\wms-parent\\wms-out-warehouse";
+//        String moduleName = "";//包名
+//        String mapperPath = "";//
+//        String projectPath = "D:\\repos\\temp2\\wms-parent\\wms-out-warehouse";
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("auto");
         gc.setOpen(false);
@@ -80,7 +80,8 @@ public class CodeGenerator4wms {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://10.108.17.27:3306/wms_out_warehouse?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://10.108.17.27:3306/wms_basic_data?useUnicode=true&useSSL=false&characterEncoding=utf8");
+//        dsc.setUrl("jdbc:mysql://10.108.17.27:3306/wms_out_warehouse?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
@@ -106,7 +107,7 @@ public class CodeGenerator4wms {
         };
 
         // 如果模板引擎是 freemarker
-        String templatePath = "/templates4wms/mapper.xml.ftl";
+        String templatePath = "/templates4wmsMp/mapper.xml.ftl";
         // 如果模板引擎是 velocity
         // String templatePath = "/templates/mapper.xml.vm";
 
@@ -141,11 +142,8 @@ public class CodeGenerator4wms {
         //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
         // templateConfig.setService();
         
-        templateConfig.setEntity("/templates4wms/entity.java");
-        templateConfig.setMapper("/templates4wms/mapper.java");
-        templateConfig.setService("/templates4wms/service.java");
-        templateConfig.setServiceImpl("/templates4wms/serviceImpl.java");
-        templateConfig.setController("/templates4wms/controller.java");
+        templateConfig.setEntity("/templates4wmsMP/entity.java");
+        templateConfig.setController("/templates4wmsMP/controller.java");
 
         templateConfig.setXml(null);
         mpg.setTemplate(templateConfig);
@@ -161,7 +159,6 @@ public class CodeGenerator4wms {
 //        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setInclude(TABLE_NAME);
 //        strategy.setSuperEntityColumns("id");
-        strategy.setSuperMapperClass("tk.mybatis.mapper.common.Mapper");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

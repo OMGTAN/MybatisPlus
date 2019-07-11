@@ -8,11 +8,11 @@ package ${package.Entity};
     import io.swagger.annotations.ApiModelProperty;
 </#if>
 <#if entityLombokModel>
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,7 +37,7 @@ import lombok.EqualsAndHashCode;
     <#-- @Accessors(chain = true) -->
 </#if>
 <#if table.convert>
-    @Table(name = "${table.name}")
+    @TableName(value = "${table.name}")
 </#if>
 <#if swagger2>
     @ApiModel(value="${entity}对象", description="${table.comment!}")
@@ -70,7 +70,7 @@ import lombok.EqualsAndHashCode;
     </#if>
     <#if field.keyFlag>
     <#-- 主键 -->
-    @Id
+    @TableId
         <#if field.keyIdentityFlag>
             @TableId(value = "${field.name}", type = IdType.AUTO)
         <#elseif idType?has_content>

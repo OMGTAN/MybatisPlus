@@ -40,13 +40,38 @@ public interface ${table.serviceName} {
     Integer save(${entity} ${entity?uncap_first});
 	
 	/**
+     * 	新增list
+     */
+    Integer save${entity}s(List<${entity}> ${entity?uncap_first}List);
+	
+	/**
      * 	修改
      */
-    Integer updateByEntity(${entity} ${entity?uncap_first});
+    Integer update${entity}(${entity} ${entity?uncap_first});
+	
+	/**
+     * 	修改list
+     */
+    Integer update${entity}s(List<${entity}> ${entity?uncap_first}List);
+	
+	/**
+     * 	全部删除重新新增
+     */
+    void deleteAndSave(List<${entity}> ${entity?uncap_first}List);
 	
 	/**
      * 	删除
      */
     Integer delete${entity}(${entity} ${entity?uncap_first});
+	
+	/**
+     * 	删除
+     */
+    Integer deleteByPrimaryKey(${entity} ${entity?uncap_first});
+	
+	/**
+     * 	删除list
+     */
+    Integer delete${entity}s(List<${entity}> ${entity?uncap_first}List);
 }
 </#if>
