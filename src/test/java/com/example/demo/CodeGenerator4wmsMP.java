@@ -18,6 +18,7 @@ import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import com.tec.anji.common.BaseEntity;
 
 // 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
 public class CodeGenerator4wmsMP {
@@ -138,6 +139,8 @@ public class CodeGenerator4wmsMP {
         // templateConfig.setService();
         
         templateConfig.setEntity("/templates4wmsMP/entity.java");
+//        templateConfig.setService("/templates4wmsMP/service.java");
+//        templateConfig.setServiceImpl("/templates4wmsMP/serviceImpl.java");
         templateConfig.setController("/templates4wmsMP/controller.java");
 
         templateConfig.setXml(null);
@@ -154,6 +157,7 @@ public class CodeGenerator4wmsMP {
 //        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setInclude(TABLE_NAME);
 //        strategy.setSuperEntityColumns("id");
+        strategy.setSuperEntityClass(BaseEntity.class);
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

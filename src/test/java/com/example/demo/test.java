@@ -16,7 +16,9 @@ import org.yaml.snakeyaml.Yaml;
 
 public class test {
 	
-	static String dataName = "out_warehouse";
+	static String dataName = "basic_data";
+//	static String dataName = "out_warehouse";
+//	static String dataName = "stock_inventory";
 	
 	public static void main(String[] args) throws IOException {
 			

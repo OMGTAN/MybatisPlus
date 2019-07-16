@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 <#if superControllerClassPackage??>
 import ${superControllerClassPackage};
 </#if>
+import com.tec.anji.service.UidGenService;
+import com.tec.anji.util.EmptyUtils;
 
 /**
  * <p>
@@ -49,15 +51,12 @@ public class ${table.controllerName} {
     
     @Autowired
     private ${table.serviceName} ${table.serviceName?uncap_first};
-    
-    @Autowired
-    private UidGenService uidGenService;
 
     /**
      *	分页
      */
     @GetMapping
-    public IPage<${entity}> list${entity}sByPage(${entity} ${entity?uncap_first}, Boolean isAsc, String[] columns, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo, @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+    public IPage<${entity}> list${entity}sByPage(${entity} ${entity?uncap_first}, @RequestParam(name = "isAsc", defaultValue = "true")Boolean isAsc, String[] columns, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo, @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
     	QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>(${entity?uncap_first});
     	queryWrapper.orderBy(!EmptyUtils.isEmpty(columns), isAsc, columns);
 
@@ -77,15 +76,23 @@ public class ${table.controllerName} {
         List<${entity}> list = ${table.serviceName?uncap_first}.list(queryWrapper);
     	return list;
     }
+    
+    /**
+     *	根据主键查询${entity?uncap_first}
+     */
+    @GetMapping(value = "/{id}")
+    public ${entity} getById(@PathVariable String id){
+    	
+    	${entity} ${entity?uncap_first} = ${table.serviceName?uncap_first}.getById(id);
+    	return ${entity?uncap_first};
+    }
 
 
     /**
      * 	新增
      */
     @PostMapping
-    public Boolean save(@RequestBody ${entity} ${entity?uncap_first}){
-    	long uid = uidGenService.getCachedUid();
-    	aisle.setStationNo(String.valueOf(uid));
+    public Boolean save${entity}(@RequestBody ${entity} ${entity?uncap_first}){
     	Boolean result = ${table.serviceName?uncap_first}.save(${entity?uncap_first});
         return result;
     }
@@ -95,10 +102,6 @@ public class ${table.controllerName} {
      */
     @PostMapping(value = "/list")
     public Boolean save${entity}s(@RequestBody List<${entity}> ${entity?uncap_first}List){
-    	${entity?uncap_first}List.forEach(${entity?uncap_first} -> {
-			long uid = uidGenService.getCachedUid();
-			//TODO
-		});
     	Boolean result = ${table.serviceName?uncap_first}.saveBatch(${entity?uncap_first}List);
         return result;
     }

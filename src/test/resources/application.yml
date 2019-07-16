@@ -10,3 +10,9 @@ out_warehouse:
   moduleName: ""
   mapperPath: ""
   tableNames: outWarehouse
+stock_inventory:
+  dataBase: wms_stock_inventory
+  projectPath: D:/repos/temp2/wms-parent/wms-stock-inventory
+  moduleName: ""
+  mapperPath: ""
+  tableNames: stockInventory

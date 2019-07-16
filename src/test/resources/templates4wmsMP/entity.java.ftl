@@ -1,7 +1,7 @@
 package ${package.Entity};
 
 <#list table.importPackages as pkg>
-    <#-- import ${pkg}; -->
+    import ${pkg};
 </#list>
 <#if swagger2>
     import io.swagger.annotations.ApiModel;
@@ -9,10 +9,6 @@ package ${package.Entity};
 </#if>
 <#if entityLombokModel>
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serializable;
-import java.util.Date;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -70,7 +66,7 @@ import lombok.EqualsAndHashCode;
     </#if>
     <#if field.keyFlag>
     <#-- 主键 -->
-    @TableId
+    @TableId(type = IdType.ID_WORKER_STR)
         <#if field.keyIdentityFlag>
             @TableId(value = "${field.name}", type = IdType.AUTO)
         <#elseif idType?has_content>
