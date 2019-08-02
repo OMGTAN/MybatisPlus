@@ -14,10 +14,11 @@ import java.util.Set;
 import org.apache.ibatis.io.ResolverUtil.Test;
 import org.yaml.snakeyaml.Yaml;
 
-public class test {
+public class GenerateAll {
 	
-	static String dataName = "basic_data";
-//	static String dataName = "out_warehouse";
+//	static String dataName = "system";
+//	static String dataName = "basic_data";
+	static String dataName = "out_warehouse";
 //	static String dataName = "stock_inventory";
 	
 	public static void main(String[] args) throws IOException {

@@ -16,3 +16,9 @@ stock_inventory:
   moduleName: ""
   mapperPath: ""
   tableNames: stockInventory
+system:
+  dataBase: wms_system
+  projectPath: D:/repos/temp2/wms-parent/wms-system
+  moduleName: ""
+  mapperPath: ""
+  tableNames: system
