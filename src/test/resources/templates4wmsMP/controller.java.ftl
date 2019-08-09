@@ -93,7 +93,7 @@ public class ${table.controllerName} {
      */
     @PostMapping
     public Boolean save${entity}(@RequestBody ${entity} ${entity?uncap_first}){
-    	Boolean result = ${table.serviceName?uncap_first}.save(${entity?uncap_first});
+    	Boolean result = ${table.serviceName?uncap_first}.save${entity}(${entity?uncap_first});
         return result;
     }
 
@@ -102,7 +102,7 @@ public class ${table.controllerName} {
      */
     @PostMapping(value = "/list")
     public Boolean save${entity}s(@RequestBody List<${entity}> ${entity?uncap_first}List){
-    	Boolean result = ${table.serviceName?uncap_first}.saveBatch(${entity?uncap_first}List);
+    	Boolean result = ${table.serviceName?uncap_first}.save${entity}s(${entity?uncap_first}List);
         return result;
     }
     

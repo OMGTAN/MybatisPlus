@@ -139,8 +139,8 @@ public class CodeGenerator4wmsMP {
         // templateConfig.setService();
         
         templateConfig.setEntity("/templates4wmsMP/entity.java");
-//        templateConfig.setService("/templates4wmsMP/service.java");
-//        templateConfig.setServiceImpl("/templates4wmsMP/serviceImpl.java");
+        templateConfig.setService("/templates4wmsMP/service.java");
+        templateConfig.setServiceImpl("/templates4wmsMP/serviceImpl.java");
         templateConfig.setController("/templates4wmsMP/controller.java");
 
         templateConfig.setXml(null);
