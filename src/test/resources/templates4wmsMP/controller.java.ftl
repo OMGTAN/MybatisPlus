@@ -56,11 +56,11 @@ public class ${table.controllerName} {
      *	分页
      */
     @GetMapping
-    public IPage<${entity}> list${entity}sByPage(${entity} ${entity?uncap_first}, @RequestParam(name = "isAsc", defaultValue = "true")Boolean isAsc, String[] columns, @RequestParam(name = "pageNo", defaultValue = "1") int pageNo, @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+    public IPage<${entity}> list${entity}sByPage(${entity} ${entity?uncap_first}, @RequestParam(name = "isAsc", defaultValue = "true")Boolean isAsc, String[] columns, @RequestParam(name = "currentPage", defaultValue = "1") int currentPage, @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
     	QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>(${entity?uncap_first});
-    	queryWrapper.orderBy(!EmptyUtils.isEmpty(columns), isAsc, columns);
+    	if(!ArrayUtils.isEmpty(columns))queryWrapper.orderBy(true, isAsc, columns);
 
-    	Page<${entity}> page = new Page<${entity}>(pageNo, pageSize);
+    	Page<${entity}> page = new Page<${entity}>(currentPage, pageSize);
     	IPage<${entity}> result = ${table.serviceName?uncap_first}.page(page, queryWrapper);
     	return result;
     }

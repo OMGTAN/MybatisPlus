@@ -96,6 +96,7 @@ import lombok.EqualsAndHashCode;
     <#if (logicDeleteFieldName!"") == field.name>
         @TableLogic
     </#if>
+    @ApiModelProperty(value = "${field.comment}")
     private ${field.propertyType} ${field.propertyName};
 </#list>
 <#------------  END 字段循环遍历  ---------->
