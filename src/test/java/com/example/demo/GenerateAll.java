@@ -18,8 +18,8 @@ public class GenerateAll {
 	
 //	static String dataName = "system";
 //	static String dataName = "basic_data";
-	static String dataName = "out_warehouse";
-//	static String dataName = "stock_inventory";
+//	static String dataName = "out_warehouse";
+	static String dataName = "stock_inventory";
 	
 	public static void main(String[] args) throws IOException {
 			
@@ -36,7 +36,7 @@ public class GenerateAll {
 	    
 	    Properties properties = new Properties();
 		     // 使用InPutStream流读取properties文件
-	    BufferedReader      bufferedReader = new BufferedReader(new FileReader("D:\\workspaces\\w20190408\\mybatisPlusDemo\\src\\test\\resources\\"+tableNames+".properties"));
+	    BufferedReader      bufferedReader = new BufferedReader(new FileReader("src\\test\\resources\\"+tableNames+".properties"));
 		    properties.load(bufferedReader);
 		     // 获取key对应的value值
 		    Set<Entry<Object, Object>> entrySet = properties.entrySet();

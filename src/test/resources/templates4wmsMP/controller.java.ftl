@@ -57,8 +57,8 @@ public class ${table.controllerName} {
      */
     @GetMapping
     public IPage<${entity}> list${entity}sByPage(${entity} ${entity?uncap_first}, @RequestParam(name = "isAsc", defaultValue = "true")Boolean isAsc, String[] columns, @RequestParam(name = "currentPage", defaultValue = "1") int currentPage, @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
-    	QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>(${entity?uncap_first});
-    	if(!ArrayUtils.isEmpty(columns))queryWrapper.orderBy(true, isAsc, columns);
+    	QueryWrapper<${entity}> queryWrapper = Wrappers.<${entity}>query(${entity?uncap_first});
+    	if(!ArrayUtils.isEmpty(columns)) queryWrapper.orderBy(true, isAsc, columns);
 
     	Page<${entity}> page = new Page<${entity}>(currentPage, pageSize);
     	IPage<${entity}> result = ${table.serviceName?uncap_first}.page(page, queryWrapper);
