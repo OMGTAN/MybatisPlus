@@ -19,7 +19,8 @@ public class GenerateAll {
 //	static String dataName = "system";
 //	static String dataName = "basic_data";
 //	static String dataName = "out_warehouse";
-	static String dataName = "stock_inventory";
+//	static String dataName = "stock_inventory";
+	static String dataName = "business";
 	
 	public static void main(String[] args) throws IOException {
 			
@@ -32,6 +33,8 @@ public class GenerateAll {
 	    CodeGenerator4wmsMP.mapperPath = object.get("mapperPath").toString();
 	    CodeGenerator4wmsMP.dataBase = object.get("dataBase").toString();
 	    CodeGenerator4wmsMP.projectPath = object.get("projectPath").toString();
+	    CodeGenerator4wmsMP.ip = object.get("ip").toString();
+	    CodeGenerator4wmsMP.port = object.get("port").toString();
 	    String tableNames = object.get("tableNames").toString();;
 	    
 	    Properties properties = new Properties();

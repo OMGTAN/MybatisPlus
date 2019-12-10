@@ -34,7 +34,10 @@ public class CodeGenerator4wmsMP {
 	static String moduleName = "";//包名
 	static String mapperPath = "";//
 	static String dataBase = "wms_out_warehouse";
-	static String projectPath = "D:\\repos\\temp2\\wms-parent\\wms-out-warehouse";
+	static String projectPath = "D:\\repos\\temp2\\wms-parent\\wms_out_warehouse";
+	
+	static String ip = "10.108.17.27";
+	static String port = "3309";
     /**
      * <p>
      * 读取控制台内容
@@ -77,7 +80,7 @@ public class CodeGenerator4wmsMP {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://10.108.17.27:3306/"+dataBase+"?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://"+ip+ ":"+ port +"/"+dataBase+"?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
