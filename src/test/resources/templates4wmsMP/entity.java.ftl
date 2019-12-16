@@ -1,7 +1,7 @@
 package ${package.Entity};
 
 <#list table.importPackages as pkg>
-    <#-- import ${pkg}; -->
+    import ${pkg};
 </#list>
 <#if swagger2>
     import io.swagger.annotations.ApiModel;
@@ -30,7 +30,7 @@ import lombok.EqualsAndHashCode;
     <#else>
    	@EqualsAndHashCode(callSuper = false)
     </#if>
-    <#-- @Accessors(chain = true) -->
+    @Accessors(chain = true)
 </#if>
 <#if table.convert>
     @TableName(value = "${table.name}")
@@ -96,7 +96,7 @@ import lombok.EqualsAndHashCode;
     <#if (logicDeleteFieldName!"") == field.name>
         @TableLogic
     </#if>
-    @ApiModelProperty(value = "${field.comment}")
+    <#-- @ApiModelProperty(value = "${field.comment}") -->
     private ${field.propertyType} ${field.propertyName};
 </#list>
 <#------------  END 字段循环遍历  ---------->
