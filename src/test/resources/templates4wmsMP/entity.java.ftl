@@ -51,17 +51,15 @@ import lombok.EqualsAndHashCode;
 </#if>
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
+	 /**
+    *	${field.comment}
+    */
     <#if field.keyFlag>
         <#assign keyPropertyName="${field.propertyName}"/>
     </#if>
-
     <#if field.comment!?length gt 0>
         <#if swagger2>
             @ApiModelProperty(value = "${field.comment}")
-        <#else>
-    /**
-    *	${field.comment}
-    */
         </#if>
     </#if>
     <#if field.keyFlag>
@@ -98,6 +96,7 @@ import lombok.EqualsAndHashCode;
     </#if>
     <#-- @ApiModelProperty(value = "${field.comment}") -->
     private ${field.propertyType} ${field.propertyName};
+    
 </#list>
 <#------------  END 字段循环遍历  ---------->
 

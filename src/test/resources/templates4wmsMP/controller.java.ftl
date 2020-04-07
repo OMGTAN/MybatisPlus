@@ -94,6 +94,7 @@ public class ${table.controllerName} {
     @PostMapping
     public Boolean save${entity}(@RequestBody ${entity} ${entity?uncap_first}){
     	Boolean result = ${table.serviceName?uncap_first}.save${entity}(${entity?uncap_first});
+    	if(!result) throw new BusinessException("新增失败！");
         return result;
     }
 
@@ -112,6 +113,7 @@ public class ${table.controllerName} {
     @PutMapping
     public Boolean update${entity}(@RequestBody ${entity} ${entity?uncap_first}){
     	Boolean result = ${table.serviceName?uncap_first}.updateById(${entity?uncap_first});
+    	if(!result) throw new BusinessException("修改失败！");
         return result;
      }
     
@@ -131,6 +133,7 @@ public class ${table.controllerName} {
     public Boolean delete${entity}(@RequestBody ${entity} ${entity?uncap_first}){
     	QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>(${entity?uncap_first});
     	Boolean result = ${table.serviceName?uncap_first}.remove(queryWrapper);
+    	if(!result) throw new BusinessException("删除失败！");
         return result;
      }
     

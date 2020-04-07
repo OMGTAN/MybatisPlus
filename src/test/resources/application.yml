@@ -22,6 +22,14 @@ system:
   moduleName: ""
   mapperPath: ""
   tableNames: system
+auth:
+  dataBase: wms_auth
+  projectPath: D:/repos/temp2/wms-parent/wms-auth
+  moduleName: ""
+  mapperPath: ""
+  tableNames: auth
+  ip: 10.108.17.27
+  port: 3309
 business:
   dataBase: wms_business
   projectPath: D:/repos/temp2/wms-parent/wms-business
