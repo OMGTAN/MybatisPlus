@@ -1,11 +1,10 @@
 package com.tec.anji.genericity;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
-import com.tec.anji.common.BaseEntity;
+import com.tec.anji.model.pojo.BaseEntity;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class asdf {
 	public static void main(String[] args) {

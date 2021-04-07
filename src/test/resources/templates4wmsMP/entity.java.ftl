@@ -8,10 +8,11 @@ package ${package.Entity};
     import io.swagger.annotations.ApiModelProperty;
 </#if>
 <#if entityLombokModel>
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 </#if>
 		
 
@@ -64,7 +65,7 @@ import lombok.EqualsAndHashCode;
     </#if>
     <#if field.keyFlag>
     <#-- 主键 -->
-    @TableId(type = IdType.ID_WORKER_STR)
+    @TableId(type = IdType.ASSIGN_ID)
         <#if field.keyIdentityFlag>
             @TableId(value = "${field.name}", type = IdType.AUTO)
         <#elseif idType?has_content>

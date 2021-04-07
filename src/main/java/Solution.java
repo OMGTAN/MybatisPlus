@@ -11,17 +11,53 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 class Solution {
 	
-	public int minTimeToVisitAllPoints(int[][] points) {
-		int result = 0;
-		for (int i = 1; i < points.length; i++) {
-			
-			result+=Math.max(Math.abs(points[i][0]-points[i-1][0]), Math.abs(points[i][1]-points[i-1][1]));
+	public int[] fairCandySwap(int[] A, int[] B) {
+		int totalA = 0, totalB = 0, diff;
+		for (int i = 0; i < A.length; i++) {
+			totalA += A[i];
+		}
+		for (int i = 0; i < B.length; i++) {
+			totalB += B[i];
+		}
+		diff =  (totalA - totalB)/2;
+		if(diff > 0) {
+			for (int i = 0; i < A.length; i++) {
+				if(A[i] <= diff)
+					continue;
+				else {
+					int a = A[i];
+					for (int j = 0; j < B.length; j++) {
+						int b = B[j];
+						if (b == a-diff) {
+							return new int [] {a,b};
+						}
+					}
+				}
+			}
+		}else {
+			diff = -diff;
+			for (int i = 0; i < B.length; i++) {
+				if(B[i] <= diff)
+					continue;
+				else {
+					int a = B[i];
+					for (int j = 0; j < A.length; j++) {
+						int b = A[j];
+						if (b == a-diff) {
+							return new int [] {b,a};
+						}
+					}
+				}
+			}
 		}
 		
-		return result;
+		return null;
     }
 
 	public static void main(String[] args) {
-		System.out.println(new Solution().minTimeToVisitAllPoints(new int[][]{{}}));
+		int[] fairCandySwap = new Solution().fairCandySwap(new int[]{1,1}, new int[]{2,2});
+		for (int i = 0; i < fairCandySwap.length; i++) {
+			System.out.println(fairCandySwap[i]);
+		}
 	}
 }

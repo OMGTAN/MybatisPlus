@@ -1,4 +1,4 @@
-package com.tec.anji.common;
+package com.tec.anji.model.pojo;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;

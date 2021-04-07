@@ -37,4 +37,4 @@ business:
   mapperPath: ""
   tableNames: business
   ip: 10.108.17.27
-  port: 3306
+  port: 3309

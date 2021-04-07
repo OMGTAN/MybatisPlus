@@ -5,6 +5,7 @@ import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
+import com.tec.anji.exception.BusinessException;
 
 /**
  * <p>
@@ -21,7 +22,9 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 }
 <#else>
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
-
+	
+	<#--
+	
 	@Autowired
     private UidGenService uidGenService;
     
@@ -43,5 +46,6 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     	boolean result = saveBatch(${entity?uncap_first}List);
         return result;
     }
+    -->
 }
 </#if>

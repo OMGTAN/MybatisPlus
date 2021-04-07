@@ -1,6 +1,7 @@
 package ${package.Controller};
 
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.tec.anji.exception.BusinessException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package.Service}.${table.serviceName};
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import java.util.List;
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +33,7 @@ import com.tec.anji.util.EmptyUtils;
  * @since ${date}
  * @version v1.0
  */
+
 <#if restControllerStyle>
 @RestController
 @RequestMapping(value = "/${entity?uncap_first}s")
@@ -46,32 +49,41 @@ public class ${table.controllerName} extends ${superControllerClass} {
     <#else>
 public class ${table.controllerName} {
     </#if>
-    
-    private Logger logger = LoggerFactory.getLogger(getClass());
-    
+      
     @Autowired
     private ${table.serviceName} ${table.serviceName?uncap_first};
 
     /**
      *	分页
      */
-    @GetMapping
-    public IPage<${entity}> list${entity}sByPage(${entity} ${entity?uncap_first}, @RequestParam(name = "isAsc", defaultValue = "true")Boolean isAsc, String[] columns, @RequestParam(name = "currentPage", defaultValue = "1") int currentPage, @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
-    	QueryWrapper<${entity}> queryWrapper = Wrappers.<${entity}>query(${entity?uncap_first});
-    	if(!ArrayUtils.isEmpty(columns)) queryWrapper.orderBy(true, isAsc, columns);
-
+    @GetMapping(value = "/page")
+    public IPage<${entity}> list${entity}sByPage(${entity} ${entity?uncap_first}, @RequestParam(name = "currentPage", defaultValue = "1") int currentPage, @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        LambdaQueryWrapper<${entity}> queryWrapper = Wrappers.<${entity}>lambdaQuery(${entity?uncap_first});
     	Page<${entity}> page = new Page<${entity}>(currentPage, pageSize);
     	IPage<${entity}> result = ${table.serviceName?uncap_first}.page(page, queryWrapper);
     	return result;
     }
-    
+<#--
+    /**
+     *	分页
+     */
+    @GetMapping(value = "/page")
+    public IPage<${entity}> list${entity}sByPage(${entity} ${entity?uncap_first}, @RequestParam(name = "isAsc", defaultValue = "true")Boolean isAsc, String[] columns, @RequestParam(name = "currentPage", defaultValue = "1") int currentPage, @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        QueryWrapper<${entity}> queryWrapper = Wrappers.<${entity}>query(${entity?uncap_first});
+        if(!EmptyUtils.isEmpty(columns)) queryWrapper.orderBy(true, isAsc, columns);
+
+        Page<${entity}> page = new Page<${entity}>(currentPage, pageSize);
+        IPage<${entity}> result = ${table.serviceName?uncap_first}.page(page, queryWrapper);
+        return result;
+    }
+-->
     
     /**
      *	根据条件查询list
      */
     @GetMapping(value = "/all")
     public List<${entity}> list${entity}s(${entity} ${entity?uncap_first}){
-    	QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>(${entity?uncap_first});
+    	LambdaQueryWrapper<${entity}> queryWrapper = Wrappers.<${entity}>lambdaQuery(${entity?uncap_first});
     	
         List<${entity}> list = ${table.serviceName?uncap_first}.list(queryWrapper);
     	return list;
@@ -93,8 +105,11 @@ public class ${table.controllerName} {
      */
     @PostMapping
     public Boolean save${entity}(@RequestBody ${entity} ${entity?uncap_first}){
-    	Boolean result = ${table.serviceName?uncap_first}.save${entity}(${entity?uncap_first});
-    	if(!result) throw new BusinessException("新增失败！");
+    	<#-- Boolean result = ${table.serviceName?uncap_first}.save${entity}(${entity?uncap_first}); -->
+    	Boolean result = ${table.serviceName?uncap_first}.save(${entity?uncap_first});
+    	if(!result) {
+    	    throw new BusinessException("新增失败！");
+    	}
         return result;
     }
 
@@ -103,7 +118,8 @@ public class ${table.controllerName} {
      */
     @PostMapping(value = "/list")
     public Boolean save${entity}s(@RequestBody List<${entity}> ${entity?uncap_first}List){
-    	Boolean result = ${table.serviceName?uncap_first}.save${entity}s(${entity?uncap_first}List);
+    	<#-- Boolean result = ${table.serviceName?uncap_first}.save${entity}s(${entity?uncap_first}List); -->
+    	Boolean result = ${table.serviceName?uncap_first}.saveBatch(${entity?uncap_first}List);
         return result;
     }
     
@@ -113,7 +129,9 @@ public class ${table.controllerName} {
     @PutMapping
     public Boolean update${entity}(@RequestBody ${entity} ${entity?uncap_first}){
     	Boolean result = ${table.serviceName?uncap_first}.updateById(${entity?uncap_first});
-    	if(!result) throw new BusinessException("修改失败！");
+    	if(!result) {
+    	    throw new BusinessException("修改失败！");
+    	}
         return result;
      }
     
@@ -133,7 +151,9 @@ public class ${table.controllerName} {
     public Boolean delete${entity}(@RequestBody ${entity} ${entity?uncap_first}){
     	QueryWrapper<${entity}> queryWrapper = new QueryWrapper<${entity}>(${entity?uncap_first});
     	Boolean result = ${table.serviceName?uncap_first}.remove(queryWrapper);
-    	if(!result) throw new BusinessException("删除失败！");
+    	if(!result) {
+    	    throw new BusinessException("删除失败！");
+    	}
         return result;
      }
     

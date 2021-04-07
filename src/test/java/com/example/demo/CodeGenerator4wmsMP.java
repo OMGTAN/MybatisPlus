@@ -18,7 +18,7 @@ import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import com.tec.anji.common.BaseEntity;
+import com.tec.anji.model.pojo.BaseEntity;
 
 // 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
 public class CodeGenerator4wmsMP {
@@ -93,7 +93,7 @@ public class CodeGenerator4wmsMP {
         //主数据
         pc.setModuleName(moduleName);
         pc.setParent("com.tec.anji");
-        pc.setEntity("pojo");
+        pc.setEntity("model.pojo");
         pc.setMapper("dao");
         mpg.setPackageInfo(pc);
 

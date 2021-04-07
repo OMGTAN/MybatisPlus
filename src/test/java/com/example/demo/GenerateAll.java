@@ -5,12 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Properties;
-import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.io.ResolverUtil.Test;
 import org.yaml.snakeyaml.Yaml;
 
@@ -47,14 +45,28 @@ public class GenerateAll {
 		    Iterator<Entry<Object, Object>> iterator = entrySet.iterator();
 		    while(iterator.hasNext()) {
 		    	Entry<Object, Object> entry = iterator.next();
-		    	System.out.println(entry.getKey().toString()+entry.getValue());
-		    	CodeGenerator4wmsMP.TABLE_NAME = entry.getKey().toString();
-		    	CodeGenerator4wmsMP.ENTITY_NAME = entry.getValue().toString();
-		    	CodeGenerator4wmsMP.MAPPER_NAME = entry.getValue() + "Mapper";
-		    	CodeGenerator4wmsMP.SERVICE_NAME = entry.getValue() + "Service";
-		    	CodeGenerator4wmsMP.SERVICE_IMPL_NAME = entry.getValue() + "Service" + "Impl";
-		    	CodeGenerator4wmsMP.CONTROLLER_NAME = entry.getValue() + "Controller";
+				Object key = entry.getKey();
+				String nameFromKey = getNameFromKey(key.toString());
+				CodeGenerator4wmsMP.TABLE_NAME = key.toString();
+		    	CodeGenerator4wmsMP.ENTITY_NAME = nameFromKey.toString();
+		    	CodeGenerator4wmsMP.MAPPER_NAME = nameFromKey + "Mapper";
+		    	CodeGenerator4wmsMP.SERVICE_NAME = nameFromKey + "Service";
+		    	CodeGenerator4wmsMP.SERVICE_IMPL_NAME = nameFromKey + "Service" + "Impl";
+		    	CodeGenerator4wmsMP.CONTROLLER_NAME = nameFromKey + "Controller";
 		    	CodeGenerator4wmsMP.main(null);
 		    }
+	}
+
+	static String getNameFromKey(String key){
+		String[] s = key.toLowerCase().split("_");
+		List<String> strings = Arrays.asList(s);
+		Iterator<String> iterator = strings.stream().iterator();
+		StringBuilder sb = new StringBuilder();
+		iterator.next();
+		while(iterator.hasNext()){
+			String next = iterator.next();
+			sb.append((char)(next.charAt(0)-32)).append(next.substring(1));
+		}
+		return sb.toString();
 	}
 }

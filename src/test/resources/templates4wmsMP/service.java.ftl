@@ -19,7 +19,7 @@ import ${superServiceClassPackage};
 interface ${table.serviceName} : ${superServiceClass}<${entity}>
 <#else>
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
-	
+	<#--
 	/**
 	 *	保存${entity?uncap_first}
 	 */
@@ -29,5 +29,6 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 	 *	保存${entity?uncap_first}List
 	 */
 	Boolean save${entity}s(List<${entity}> ${entity?uncap_first}List);
+	-->
 }
 </#if>
