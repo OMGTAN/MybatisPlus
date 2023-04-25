@@ -33,11 +33,10 @@ public class CodeGenerator4wmsMP {
 	
 	static String moduleName = "";//包名
 	static String mapperPath = "";//
-	static String dataBase = "wms_out_warehouse";
-	static String projectPath = "D:\\repos\\temp2\\wms-parent\\wms_out_warehouse";
-	
-	static String ip = "10.108.17.27";
-	static String port = "3309";
+	static String dataBase = "blog";
+	static String projectPath = "D:\\repos\\suaee\\parent\\auto-inspect";
+	static String ip = "127.0.0.1";
+	static String port = "3306";
     /**
      * <p>
      * 读取控制台内容
@@ -83,8 +82,8 @@ public class CodeGenerator4wmsMP {
         dsc.setUrl("jdbc:mysql://"+ip+ ":"+ port +"/"+dataBase+"?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("mysql123456");
+        dsc.setUsername("user");
+        dsc.setPassword("123456");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -92,7 +91,7 @@ public class CodeGenerator4wmsMP {
 //        pc.setModuleName(scanner("模块名"));
         //主数据
         pc.setModuleName(moduleName);
-        pc.setParent("com.tec.anji");
+        pc.setParent("com.suaee.auto.inspect");
         pc.setEntity("model.pojo");
         pc.setMapper("dao");
         mpg.setPackageInfo(pc);

@@ -18,7 +18,7 @@ public class GenerateAll {
 //	static String dataName = "basic_data";
 //	static String dataName = "out_warehouse";
 //	static String dataName = "stock_inventory";
-	static String dataName = "business";
+	static String dataName = "blog";
 //	static String dataName = "auth";
 	
 	public static void main(String[] args) throws IOException {

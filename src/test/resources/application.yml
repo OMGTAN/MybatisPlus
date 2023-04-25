@@ -38,3 +38,11 @@ business:
   tableNames: business
   ip: 10.108.17.27
   port: 3309
+blog:
+  dataBase: blog
+  projectPath: D:/repos/suaee/parent/auto-inspect
+  moduleName: ""
+  mapperPath: ""
+  tableNames: blog
+  ip: 127.0.0.1
+  port: 3306

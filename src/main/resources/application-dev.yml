@@ -6,8 +6,8 @@ spring:
   datasource:
     type: com.mchange.v2.c3p0.ComboPooledDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.171.128:3306/mydb?useSSL=false&serverTimezone=UTC
-    username: root
+    url: jdbc:mysql://127.0.0.1:3306/blog?useSSL=false&serverTimezone=UTC
+    username: user
     password: 123456
 
   
