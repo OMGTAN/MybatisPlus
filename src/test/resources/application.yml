@@ -46,3 +46,11 @@ blog:
   tableNames: blog
   ip: 127.0.0.1
   port: 3306
+inspection:
+  dataBase: inspection
+  projectPath: D:/repos/suaee/parent/auto-inspect
+  moduleName: ""
+  mapperPath: ""
+  tableNames: inspection
+  ip: 192.168.95.84
+  port: 3306
