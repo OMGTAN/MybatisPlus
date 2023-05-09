@@ -1,13 +1,14 @@
 server:
-  port: 2525
+  port: 8081
  
 # 该配置的名称是固定的，不可以改变，否则将不能自动加载到数据源中
 spring:
   datasource:
     type: com.mchange.v2.c3p0.ComboPooledDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/blog?useSSL=false&serverTimezone=UTC
-    username: user
+    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://192.168.95.84:3306/inspection?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://192.168.95.84:3306/inspection
+    username: root
     password: 123456
 
   
