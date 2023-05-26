@@ -1,0 +1,13 @@
+server:
+  port: 8081
+ 
+# 该配置的名称是固定的，不可以改变，否则将不能自动加载到数据源中
+spring:
+  datasource:
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@192.168.172.104:1521:ORCLCDB
+    username: c##ljstest
+    password: password01!
+
+  
