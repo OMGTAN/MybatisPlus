@@ -22,7 +22,7 @@ public class Generator {
     @PostConstruct
     void generate(){
 
-        String targetPath = "D:\\repos\\suaee\\parent\\manageproject\\src\\";
+        String targetPath = "D:\\repos\\svn\\deep\\monitor\\manageproject\\src\\";
         String packageName = "com.suaee.manageproject";
 
         log.info("url：{}", baseConfig.getUrl());
@@ -42,7 +42,7 @@ public class Generator {
                                     targetPath+ "main\\resources\\mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("CEMS_CQ_OBJECT","CEMS_CQ_PROJECT","CEMS_CQ_PUBINFO","CEMS_CQ_SELLER","CEMS_CQ_SHAREHOLDER","CEMS_MERCHANT","CEMS_NOTICE","CEMS_NOTICE_INFO","CEMS_PROJECT","CEMS_PROJECT_CHAIN","CEMS_PROJECT_SYN","CEMS_ZC_PROJECT","CEMS_ZC_SELLER","CEMS_ZZ_INVESTOR","CEMS_ZZ_OBJECT","CEMS_ZZ_PROJECT","CEMS_ZZ_PUBINFO","CEMS_ZZ_SHAREHOLDER","CEMS_ZZ_TRADE") // 设置需要生成的表名
+                    builder.addInclude("CEMS_USER_INFO") // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             // entity 配置
                             .entityBuilder()
