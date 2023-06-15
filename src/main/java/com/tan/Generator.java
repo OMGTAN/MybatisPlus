@@ -1,6 +1,7 @@
 package com.tan;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
+import com.baomidou.mybatisplus.generator.config.ConstVal;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
@@ -41,12 +42,15 @@ public class Generator {
                                     targetPath+ "main\\resources\\mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
+                    builder.serviceBuilder().convertServiceFileName((entityName -> entityName + ConstVal.SERVICE))
+                    ;
+                })
+                .strategyConfig(builder -> {
                     builder.addInclude("ACTIVITY_APPROVAL","ACTIVITY_AUTH","ACTIVITY_FB","ACTIVITY_FB_BACK","ACTIVITY_GL","ACTIVITY_IMG_GL","ACTIVITY_NOTICE_USER","ACTIVITY_SIGN_UP","ACTIVITY_SQ","ACTIVITY_TEAM","PLAT_ACTIVITY") // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             // entity 配置
                             .entityBuilder()
                             .enableLombok()
-
                     ;
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
