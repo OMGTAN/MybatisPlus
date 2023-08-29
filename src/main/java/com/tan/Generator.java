@@ -1,5 +1,6 @@
 package com.tan;
 
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.ConstVal;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
@@ -22,11 +23,11 @@ public class Generator {
 
     void generate(){
 
-//        String targetPath = "D:\\repos\\svn\\deep\\monitor\\manageproject\\src\\";
-//        String packageName = "com.suaee.manageproject";
+        String targetPath = "D:\\repos\\svn\\deep\\monitor\\manageproject\\src\\";
+        String packageName = "com.suaee.manageproject";
 
-        String targetPath = "D:\\repos\\svn\\deep\\monitor\\datanalysis\\src\\";
-        String packageName = "com.suaee.datanalysis";
+//        String targetPath = "D:\\repos\\svn\\deep\\monitor\\datanalysis\\src\\";
+//        String packageName = "com.suaee.datanalysis";
 
         log.info("url：{}", baseConfig.getUrl());
         FastAutoGenerator.create(baseConfig.getUrl(), baseConfig.getUsername(), baseConfig.getPassword())
@@ -46,10 +47,11 @@ public class Generator {
                 })
                 .strategyConfig(builder -> {
                     builder.serviceBuilder().convertServiceFileName((entityName -> entityName + ConstVal.SERVICE))
+                            .entityBuilder().enableActiveRecord().enableLombok().enableChainModel()
                     ;
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("WCMMETATABLEINJECTASSETS", "WCMMETATABLEASSETSTRANS", "WCMMETATABLESTOCKTRANS", "VIEW_CJS_FIVETABLE") // 设置需要生成的表名
+                    builder.addInclude("PROJECT", "NOTICE") // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             // entity 配置
 
