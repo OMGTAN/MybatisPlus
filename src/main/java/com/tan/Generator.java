@@ -54,7 +54,7 @@ public class Generator {
                     ;
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("interface_conf", "application", "result", "user") // 设置需要生成的表名
+                    builder.addInclude("user_group") // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             // entity 配置
 
