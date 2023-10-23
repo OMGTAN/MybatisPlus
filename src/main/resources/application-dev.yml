@@ -10,7 +10,7 @@ spring:
 #    url: jdbc:mysql://192.168.95.84:3306/inspection
 #    username: root
 #    password: 123456
-    url: jdbc:mysql://10.21.18.46:3306/app_monitor
+    url: jdbc:mysql://10.21.18.46:3306/app_monitor_test
     username: root
     password: 123456#
   
