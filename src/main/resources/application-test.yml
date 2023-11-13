@@ -9,5 +9,3 @@ spring:
     url: jdbc:oracle:thin:@192.168.172.104:1521:ORCLCDB
     username: c##ljstest
     password: password01!
-
-  
