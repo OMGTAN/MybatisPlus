@@ -23,8 +23,11 @@ public class Generator {
 
     void generate(){
 
-        String targetPath = "D:\\repos\\svn\\deep\\monitor\\manageproject\\src\\";
-        String packageName = "com.suaee.manageproject";
+        String targetPath = "D:\\repos\\svn\\deep\\monitor\\financeLease\\src\\";
+        String packageName = "com.suaee.finance.lease";
+
+//        String targetPath = "D:\\repos\\svn\\deep\\monitor\\manageproject\\src\\";
+//        String packageName = "com.suaee.manageproject";
 
 //        String targetPath = "D:\\repos\\svn\\deep\\monitor\\datanalysis\\src\\";
 //        String packageName = "com.suaee.datanalysis";
@@ -54,7 +57,7 @@ public class Generator {
                     ;
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("SUAEE_CQ_OBJECT", "SUAEE_CQ_PROJECT", "SUAEE_CQ_PUBINFO", "SUAEE_CQ_SELLER", "SUAEE_CQ_SHAREHOLDER", "SUAEE_PROJECT_SYN", "SUAEE_ZC_PROJECT", "SUAEE_ZC_SELLER", "SUAEE_ZZ_OBJECT", "SUAEE_ZZ_PROJECT", "SUAEE_ZZ_PUBINFO", "SUAEE_ZZ_SHAREHOLDER") // 设置需要生成的表名
+                    builder.addInclude("flease_asset_info","flease_parking_info","flease_parking_lot","flease_statistical_result") // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             // entity 配置
 
