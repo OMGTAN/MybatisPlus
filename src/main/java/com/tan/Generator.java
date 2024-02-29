@@ -23,8 +23,8 @@ public class Generator {
 
     void generate(){
 
-        String targetPath = "D:\\repos\\svn\\deep\\monitor\\financeLease\\src\\";
-        String packageName = "com.suaee.finance.lease";
+//        String targetPath = "D:\\repos\\svn\\deep\\monitor\\financeLease\\src\\";
+//        String packageName = "com.suaee.finance.lease";
 
 //        String targetPath = "D:\\repos\\svn\\deep\\monitor\\manageproject\\src\\";
 //        String packageName = "com.suaee.manageproject";
@@ -34,6 +34,9 @@ public class Generator {
 
 //        String targetPath = "D:\\repos\\svn\\deep\\monitor\\app-monitor\\src\\";
 //        String packageName = "com.suaee.app.monitor";
+
+        String targetPath = "D:\\repos\\suaee\\website\\commonservice\\src\\";
+        String packageName = "com.commonservice";
 
         log.info("url：{}", baseConfig.getUrl());
         FastAutoGenerator.create(baseConfig.getUrl(), baseConfig.getUsername(), baseConfig.getPassword())
@@ -57,7 +60,7 @@ public class Generator {
                     ;
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("flease_asset_info","flease_parking_info","flease_parking_lot","flease_statistical_result") // 设置需要生成的表名
+                    builder.addInclude("LK_PROBLEM_FEEDBACK") // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             // entity 配置
 
