@@ -63,7 +63,7 @@ public class Generator {
                     ;
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("LK_PROBLEM_FEEDBACK") // 设置需要生成的表名
+                    builder.addInclude("TRS_OA_HRM") // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             // entity 配置
 
