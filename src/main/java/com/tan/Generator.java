@@ -26,6 +26,8 @@ public class Generator {
 
     void generate(){
 
+        String mapperPath = "main\\resources\\mapper";
+
 //        String targetPath = "D:\\repos\\svn\\deep\\monitor\\financeLease\\src\\";
 //        String packageName = "com.suaee.finance.lease";
 
@@ -55,7 +57,7 @@ public class Generator {
 //                            .moduleName("system") // 设置父包模块名
                             .pathInfo(Collections.singletonMap(OutputFile.xml,
 //                                    "D:\\repos\\github\\MybatisPlus\\src\\test\\resources\\mapper")); // 设置mapperXml生成路径
-                                    targetPath+ "main\\resources\\mapper")); // 设置mapperXml生成路径
+                                    targetPath + mapperPath)); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
                     builder.serviceBuilder().convertServiceFileName((entityName -> entityName + ConstVal.SERVICE))
@@ -63,7 +65,7 @@ public class Generator {
                     ;
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("TRS_OA_HRM") // 设置需要生成的表名
+                    builder.addInclude("LK_WORKING_ARRANGEMENT") // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             // entity 配置
 
@@ -72,11 +74,10 @@ public class Generator {
                     ;
                 })
                 //模板配置
-//                .templateConfig(builder -> {
-//                        builder.controller("template/controller.java.vm");
-//                    }
-//
-//                )
+                .templateConfig(builder -> {
+                        builder.controller("template/controller.java.vm");
+                    }
+                )
                 .templateEngine(new VelocityTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();
     }

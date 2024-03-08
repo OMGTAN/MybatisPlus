@@ -1,15 +1,17 @@
 package $!{package.Controller};
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dev.mybatisPlus.util.AjaxResult;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import com.github.pagehelper.PageHelper;
-import com.dev.mybatisPlus.util.page.PageDomain;
-import com.dev.mybatisPlus.util.page.TableDataInfo;
 import java.util.Objects;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import $!{package.Service}.$!{table.serviceName};
 import $!{package.Entity}.$!{table.entityName};
 
@@ -41,49 +43,42 @@ public class $!{table.controllerName} {
     private $!{table.serviceName} service;
 
     @GetMapping({"list"})
-    public TableDataInfo list($!{table.entityName} entity,PageDomain pageDomain){
-        PageHelper.startPage(CheckPageDomain(pageDomain));
-        QueryWrapper<$!{table.entityName}> qw = new QueryWrapper<$!{table.entityName}>();
-        qw.setEntity(entity)#foreach($field in ${table.fields})#if(${field.keyFlag}).orderByAsc("$!{field.name}");#end#end
-        return getDataTable(service.list(qw));
+    @ApiOperation("列表")
+    public String list(@RequestBody PageQuery pageQuery){
+        IPage<$!{table.entityName}> page = new Page<>(pageQuery.getPageIndex(), pageQuery.getPageSize());
+        LambdaQueryWrapper<$!{table.entityName}> eq = Wrappers.<$!{table.entityName}>lambdaQuery();
+        IPage<$!{table.entityName}> list = service.page(page, eq);
+        PageModel p= new PageModel(pageQuery.getPageIndex(), pageQuery.getPageSize(), list.getRecords());
+        p.setRecordCount(page.getTotal());
+        return JSONUtil.toJsonStr(MsgVo.Ok(p));
     }
 
     @GetMapping({"/getOne/{id}"})
-    public AjaxResult getById(@PathVariable("id") int id) {
-        return success("查询成功!",service.getById(id));
+    @ApiOperation("详情")
+    public String getById(@PathVariable("id") int id) {
+        return JSONUtil.toJsonStr(MsgVo.Ok(service.getById(id)));
     }
 
     @PostMapping({"save"})
-    public AjaxResult save(@RequestBody @Valid $!{table.entityName} entity) {
-        return super.toAjax(service.save(entity));
+    @ApiOperation("新增")
+    public String save(@RequestBody @Valid $!{table.entityName} entity) {
+        return JSONUtil.toJsonStr(MsgVo.Ok(service.save(entity)));
     }
 
-    @PutMapping({"update"})
-    public AjaxResult update(@RequestBody $!{table.entityName} entity) {
-    #foreach($entity in ${table.fields})
-        #if(${entity.keyFlag})##生成主键排在第一位
-        #set($getId = "entity.get" + $entity.propertyName.substring(0, 1).toUpperCase() + $entity.propertyName.substring(1) + "()")
-        if(Objects.isNull($getId)){
-            return error("参数为空!");
-        }
-        var result = service.getById($getId);
-        #end
-    #end
-        if(Objects.nonNull(result)){
-            return super.toAjax(service.updateById(entity));
-        }else{
-            return error("数据不存在!");
-        }
+    @PostMapping({"update"})
+    @ApiOperation("修改")
+    public String update(@RequestBody $!{table.entityName} entity) {
+        boolean b = service.updateById(entity);
+
+        return JSONUtil.toJsonStr(b ? MsgVo.Ok(null): MsgVo.ERROR(null));
     }
 
     @DeleteMapping({"/remove/{id}"})
-    public AjaxResult remove(@PathVariable("id") int id) {
-        var entity = service.getById(id);
-        if(Objects.nonNull(entity)){
-            return super.toAjax(service.removeById(id));
-        }else{
-            return error("数据不存在!");
-        }
+    @ApiOperation("删除")
+    public String remove(@PathVariable("id") int id) {
+        boolean b = service.removeById(id);
+
+        return JSONUtil.toJsonStr(b ? MsgVo.Ok(null): MsgVo.ERROR(null));
     }
 }
 #end
