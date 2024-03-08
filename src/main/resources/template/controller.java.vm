@@ -27,6 +27,7 @@ import $!{superControllerClassPackage};
  * @date: $!{date}
  */
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600, methods = {RequestMethod.POST, RequestMethod.GET})
 @RequestMapping({"#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end"})
 #if(${kotlin})
 class $!{table.controllerName}#if(${superControllerClass}) : $!{superControllerClass}()#end
