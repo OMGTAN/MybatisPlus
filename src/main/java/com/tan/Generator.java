@@ -65,7 +65,7 @@ public class Generator {
                     ;
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("LK_SYSTEM_CONFIG") // 设置需要生成的表名
+                    builder.addInclude("LK_WORKFLOW") // 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             // entity 配置
 

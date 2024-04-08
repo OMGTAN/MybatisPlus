@@ -43,9 +43,9 @@ public class $!{table.controllerName} {
     @Autowired
     private $!{table.serviceName} service;
 
-    @GetMapping({"list"})
+    @PostMapping({"page"})
     @ApiOperation("列表")
-    public String list(@RequestBody PageQuery pageQuery){
+    public String page(@RequestBody PageQuery pageQuery){
         IPage<$!{table.entityName}> page = new Page<>(pageQuery.getPageIndex(), pageQuery.getPageSize());
         LambdaQueryWrapper<$!{table.entityName}> eq = Wrappers.<$!{table.entityName}>lambdaQuery();
         IPage<$!{table.entityName}> list = service.page(page, eq);
@@ -56,7 +56,7 @@ public class $!{table.controllerName} {
 
     @GetMapping({"/getOne/{id}"})
     @ApiOperation("详情")
-    public String getById(@PathVariable("id") int id) {
+    public String getById(@PathVariable("id") String id) {
         return JSONUtil.toJsonStr(MsgVo.Ok(service.getById(id)));
     }
 
@@ -71,15 +71,15 @@ public class $!{table.controllerName} {
     public String update(@RequestBody $!{table.entityName} entity) {
         boolean b = service.updateById(entity);
 
-        return JSONUtil.toJsonStr(b ? MsgVo.Ok(null): MsgVo.ERROR(null));
+        return JSONUtil.toJsonStr(MsgVo.Ok(b));
     }
 
-    @DeleteMapping({"/remove/{id}"})
+    @PostMapping({"/remove/{id}"})
     @ApiOperation("删除")
-    public String remove(@PathVariable("id") int id) {
+    public String remove(@PathVariable("id") String id) {
         boolean b = service.removeById(id);
 
-        return JSONUtil.toJsonStr(b ? MsgVo.Ok(null): MsgVo.ERROR(null));
+        return JSONUtil.toJsonStr(MsgVo.Ok(b));
     }
 }
 #end
