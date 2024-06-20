@@ -1,0 +1,119 @@
+package ${package.Controller};
+
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import com.gientech.dadp.common.Result;
+import com.gientech.dadp.common.view.DataGrid;
+import com.gientech.dadp.common.enums.OperType;
+import com.gientech.dadp.core.base.BaseController;
+import com.gientech.dadp.core.log.annotation.OperLog;
+import com.gientech.dadp.core.security.annotation.PreAuthorize;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+
+import $!{package.Service}.$!{table.serviceName};
+import $!{package.Entity}.$!{table.entityName};
+
+import org.springframework.web.bind.annotation.RequestMapping;
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@RestController
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityName}#end")
+@Tag(name="【1】${table.comment}", description ="${table.comment}") //排序号【1】生成后要修改
+@Validated
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+
+    @Autowired
+    private $!{table.serviceName} ${table.entityName}Service;
+
+        /**
+         * 【1】查询和分页
+         *
+         * @param ${table.entityName}Form    查询DTO
+         * @param bindingResult             参数校验
+         * @return
+         */
+        @Operation(summary = "list", description = "查询和分页")
+        @OperLog(title = "${table.comment}", operType = OperType.SEARCH)
+        @PreAuthorize(hasAuth = "${table.entityName}") // 菜单id或功能id
+        @PostMapping(value = "/list")
+        public Result<DataGrid<${table.entityName}Vo>> list(@Valid @RequestBody ${table.entityName}Form ${table.entityName}Form, BindingResult bindingResult) {
+            return Result.success(this.${table.entityName}Service.list${table.entityName}(${table.entityName}Form));
+        }
+
+        /**
+         * 【2】新增后保存
+         *
+         * @param ${table.entityName}Form 新增DTO
+         * @param bindingResult           参数校验
+         * @return
+         */
+        @Operation(summary = "save", description = "新增后保存")
+        @OperLog(title = "${table.comment}", operType = OperType.INSERT)
+        @PreAuthorize(hasAuth = "${table.entityName}") // 菜单id或功能id
+        @PostMapping("/save")
+        public Result<Object> save(@Valid @RequestBody ${table.entityName}Form ${table.entityName}Form, BindingResult bindingResult) {
+            this.${table.entityName}Service.save${table.entityName}(${table.entityName}Form);
+            return Result.success();
+        }
+
+        /**
+         * 【3】修改
+         *
+         * @param ${table.entityName}Form 修改DTO，一定要传主键
+         * @param bindingResult           参数校验
+         * @return
+         */
+        @Operation(summary = "update", description = "修改")
+        @OperLog(title = "${table.comment}", operType = OperType.UPDATE)
+        @PreAuthorize(hasAuth = "${table.entityName}") // 菜单id或功能id
+        @PostMapping("/update")
+        public Result<Object> update(@Valid @RequestBody ${table.entityName}Form ${table.entityName}Form, BindingResult bindingResult) {
+            this.${table.entityName}Service.update${table.entityName}(${table.entityName}Form);
+            return Result.success();
+        }
+
+        /**
+         * 【4】删除--删除DTO,多个id以逗号分隔
+         *
+         * @param ${table.entityName}Form
+         * @param bindingResult           参数校验
+         * @return
+         */
+        @Operation(summary = "delete", description = "删除,主键ids,以逗号分隔")
+        @OperLog(title = "${table.comment}", operType = OperType.DELETE)
+        @PreAuthorize(hasAuth = "${table.entityName}") // 菜单id或功能id
+        @PostMapping("/delete")
+        public Result<Object> delete(@Valid @RequestBody ${table.entityName}Form ${table.entityName}Form, BindingResult bindingResult) {
+            this.${table.entityName}Service.delete${table.entityName}(${table.entityName}Form.get${table.entityName}Ids());
+            return Result.success();
+        }
+}
+#end

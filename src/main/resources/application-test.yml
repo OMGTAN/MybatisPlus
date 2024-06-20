@@ -7,5 +7,7 @@ spring:
     type: com.mchange.v2.c3p0.ComboPooledDataSource
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@192.168.172.104:1521:ORCLCDB
-    username: c##ljstest
+#    username: c##ljstest
+#    password: password01!
+    username: c##ljsjyb
     password: password01!

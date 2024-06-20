@@ -1,32 +1,27 @@
 package com.tan;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.ConstVal;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
-import com.baomidou.mybatisplus.generator.config.TemplateConfig;
-import com.baomidou.mybatisplus.generator.config.TemplateType;
-import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
-import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.sql.Types;
 import java.util.Collections;
 
 @Component
 @Slf4j
-public class Generator {
+public class GeneratorJyb {
 
     @Autowired
     private DataBaseConfig baseConfig;
 
     void generate(){
+        String packageName = "com.gientech.dadp.a.generate";
 
-        String mapperPath = "main\\resources\\mapper";
+//        String mapperPath = "main\\resources\\mapper";
+        String mapperPath = "main\\java\\com\\gientech\\dadp\\a\\generate\\mapper";
 
 //        String targetPath = "D:\\repos\\svn\\deep\\monitor\\financeLease\\src\\";
 //        String packageName = "com.suaee.finance.lease";
@@ -40,8 +35,8 @@ public class Generator {
 //        String targetPath = "D:\\repos\\svn\\deep\\monitor\\app-monitor\\src\\";
 //        String packageName = "com.suaee.app.monitor";
 
-        String targetPath = "D:\\repos\\suaee\\jyb\\jyb-biz\\jyb-biz-model\\src\\";
-        String packageName = "com.gientech.dadp.jyb.generate";
+        String targetPath = "D:\\repos\\suaee\\jyb\\jyb-biz\\jyb-biz-service\\src\\";
+
 
         log.info("url：{}", baseConfig.getUrl());
         FastAutoGenerator.create(baseConfig.getUrl(), baseConfig.getUsername(), baseConfig.getPassword())
@@ -62,20 +57,24 @@ public class Generator {
                 .strategyConfig(builder -> {
                     builder.serviceBuilder().convertServiceFileName((entityName -> entityName + ConstVal.SERVICE))
                             .entityBuilder().enableActiveRecord().enableLombok().enableChainModel()
+                            .logicDeleteColumnName("IS_DELETE")
                     ;
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("T_QY_USER_CORP_GRP") // 设置需要生成的表名
-//                            .addTablePrefix("t_", "c_") // 设置过滤表前缀
+                    builder.addInclude("T_GZ_JOB_LOG") // 设置需要生成的表名
+                            .addTablePrefix("T_") // 设置过滤表前缀
                             // entity 配置
 
                             .entityBuilder()
                             .enableLombok()
                     ;
                 })
-                //模板配置
+                //交易宝模板配置
                 .templateConfig(builder -> {
-                        builder.controller("template/controller.java.vm");
+                        builder.controller("templateJyb/controller.java.vm");
+                        builder.serviceImpl("templateJyb/serviceImpl.java.vm");
+                        builder.mapper("templateJyb/mapper.java.vm");
+                        builder.xml("templateJyb/mapper.xml.vm");
                     }
                 )
                 .templateEngine(new VelocityTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板

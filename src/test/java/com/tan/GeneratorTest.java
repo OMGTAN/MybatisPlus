@@ -11,8 +11,16 @@ public class GeneratorTest {
     @Autowired
     private Generator generator;
 
+    @Autowired
+    private GeneratorJyb generatorJyb;
+
     @Test
     public void generate(){
         generator.generate();
+    }
+
+    @Test
+    public void generateJyb(){
+        generatorJyb.generate();
     }
 }
