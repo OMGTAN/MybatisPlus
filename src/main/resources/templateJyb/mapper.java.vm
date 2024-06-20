@@ -4,6 +4,13 @@ import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
 #if(${mapperAnnotationClass})
 import ${mapperAnnotationClass.name};
+
+import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 #end
 
 /**
@@ -22,8 +29,7 @@ interface ${table.mapperName} : ${superMapperClass}<${entity}>
 #else
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
 
-    List<${table.entityName}Vo> get${table.entityName}List(Page<${table.entityName}Vo> page, @Param("dto") ${table.entityName}Dto4List dto);
+    List<${table.entityName}Vo> get${table.entityName}List(Page<${table.entityName}Vo> page, @Param("dto") ${table.entityName}Form dto);
 
-    List<${table.entityName}Vo> get${table.entityName}List(@Param("dto") ${table.entityName}Dto4List dto);
 }
 #end

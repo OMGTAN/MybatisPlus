@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 
-import $!{package.Service}.$!{table.serviceName};
+import $!{package.Service}.impl.$!{table.serviceName}Impl;
 import $!{package.Entity}.$!{table.entityName};
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +51,7 @@ public class ${table.controllerName} {
 #end
 
     @Autowired
-    private $!{table.serviceName} ${table.entityName}Service;
+    private $!{table.serviceName}Impl ${table.entityName}Service;
 
         /**
          * 【1】查询和分页
@@ -64,7 +64,7 @@ public class ${table.controllerName} {
         @OperLog(title = "${table.comment}", operType = OperType.SEARCH)
         @PreAuthorize(hasAuth = "${table.entityName}") // 菜单id或功能id
         @PostMapping(value = "/list")
-        public Result<DataGrid<${table.entityName}Vo>> list(@Valid @RequestBody ${table.entityName}Form ${table.entityName}Form, BindingResult bindingResult) {
+        public Result<Page<${table.entityName}Vo>> list(@Valid @RequestBody ${table.entityName}Form ${table.entityName}Form, BindingResult bindingResult) {
             return Result.success(this.${table.entityName}Service.list${table.entityName}(${table.entityName}Form));
         }
 

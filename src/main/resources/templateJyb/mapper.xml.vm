@@ -36,4 +36,37 @@
     </sql>
 
 #end
+
+<mapper namespace="com.gientech.dadp.jyb.gz.jobLog.GzJobLogMapper">
+
+	<!-- 查询条件置顶 -->
+	<sql id="gzJobLogList_filter">
+		<if test="dto.dataAuthJoinSql != null and dto.dataAuthJoinSql !=''">
+			<![CDATA[	 ${dto.dataAuthJoinSql} 	]]>
+		</if>
+		<where>
+			<trim suffixOverrides="AND">
+			    #foreach($field in ${table.commonFields})
+                    a.${field.columnName} ${table.propertyName},
+                    <if test="dto.dataAuthFilterSql != null and dto.dataAuthFilterSql !=''">
+                        <![CDATA[	 ${dto.dataAuthFilterSql} AND	]]>
+                    </if>
+                #end
+			</trim>
+		</where>
+	</sql>
+
+	<select id="getGzJobLogList" resultType="com.gientech.dadp.jyb.gz.jobLog.GzJobLogVo" parameterType="com.gientech.dadp.jyb.gz.jobLog.GzJobLogDto4List">
+		select
+
+        #foreach($field in ${table.commonFields})
+                a.${field.columnName} ${table.propertyName},
+        #end
+        11  ${table.fieldNames}
+		from ${table.name} a
+
+		<include refid="gzJobLogList_filter" />
+
+	</select>
+
 </mapper>

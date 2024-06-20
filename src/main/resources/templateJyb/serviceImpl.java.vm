@@ -5,16 +5,29 @@ import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.gientech.dadp.common.exception.AppException;
+import com.gientech.dadp.common.util.MyBeanUtil;
+import com.gientech.dadp.common.util.MyStringUtil;
+import com.gientech.dadp.common.view.DataGrid;
+import com.gientech.dadp.common.auth.UserSession;
+import com.gientech.dadp.core.base.BaseService;
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * {table.comment}--Service
+ * ${table.comment}--Service
  * 
  * @author {author}
  */
 @Slf4j
 @Service
 @Transactional
-public class ${table.entityName}Service extends BaseService<${table.entityName}Mapper, ${table.entityName}> {
+public class ${table.entityName}ServiceImpl extends BaseService<${table.entityName}Mapper, ${table.entityName}> {
 
     /**
      * 【1】查询和分页
@@ -23,8 +36,8 @@ public class ${table.entityName}Service extends BaseService<${table.entityName}M
      *
      * @return
      */
-    public DataGrid<${table.entityName}Vo> list{_Sample}(${table.entityName}Dto4List dto) {
-        log.info("【list查询条件--{table.comment}】{}", dto);
+    public Page<${table.entityName}Vo> list${table.entityName}(${table.entityName}Form dto) {
+        log.info("【list查询条件--${table.comment}】{}", dto);
 
         // 【1】 处理模糊查询条件的like(有3个方法addObjectLike，addObjectLikeLeft，addObjectLikeRight)
         MyStringUtil.addObjectLike(dto, "{searchConditionsAddLike}");
@@ -48,7 +61,7 @@ public class ${table.entityName}Service extends BaseService<${table.entityName}M
         // 【3】构造分页参数
         Page<${table.entityName}Vo> page = new Page<>(dto.getPageNo(), dto.getPageSize());
 
-        return new DataGrid<${table.entityName}Vo>(this.getBaseMapper().get${table.entityName}List(page, dto), page.getTotal());
+        return page;
     }
 
     /**
@@ -56,8 +69,8 @@ public class ${table.entityName}Service extends BaseService<${table.entityName}M
      *
      * @param dto
      */
-    public void save{_Sample}(${table.entityName}Dto4Save dto) {
-        log.info("【新增--{table.comment}】{}", dto);
+    public void save${table.entityName}(${table.entityName}Form dto) {
+        log.info("【新增--${table.comment}】{}", dto);
 
         // 【1】 从dto中copy属性
         ${table.entityName} ${table.entityName} = new ${table.entityName}();
@@ -65,7 +78,7 @@ public class ${table.entityName}Service extends BaseService<${table.entityName}M
 
         // 【2】 校验业务唯一性, 其中: 可变参数field1, field2, ..., fieldn 是实体类属性名.
         //if (checkBizUnique(${table.entityName}, true, field1, field2, ..., fieldn)) {
-        //    throw new AppException("新增失败，{table.comment}【" + field1+"-"+field2+"-"+...+"-"+fieldn + "】已经存在！");
+        //    throw new AppException("新增失败，${table.comment}【" + field1+"-"+field2+"-"+...+"-"+fieldn + "】已经存在！");
         //}
 
         ${table.entityName}.setVer(1);// 数据版本
@@ -77,8 +90,8 @@ public class ${table.entityName}Service extends BaseService<${table.entityName}M
      *
      * @param dto
      */
-    public void update{_Sample}(${table.entityName}Dto4Update dto) {
-        log.info("【修改--{table.comment}】{}", dto);
+    public void update${table.entityName}(${table.entityName}Form dto) {
+        log.info("【修改--${table.comment}】{}", dto);
 
         // 【1】 从dto中copy属性
         ${table.entityName} ${table.entityName} = new ${table.entityName}();
@@ -86,7 +99,7 @@ public class ${table.entityName}Service extends BaseService<${table.entityName}M
 
         // 【2】 校验业务唯一性, 其中: 可变参数field1, field2, ..., fieldn 是实体类属性名.
         //if (checkBizUnique(${table.entityName}, false, field1, field2, ..., fieldn)) {
-        //    throw new AppException("更新失败，{table.comment}【" + field1+"-"+field2+"-"+...+"-"+fieldn + "】已经存在！");
+        //    throw new AppException("更新失败，${table.comment}【" + field1+"-"+field2+"-"+...+"-"+fieldn + "】已经存在！");
         //}
         
         if (!this.updateById(${table.entityName})) {
@@ -97,64 +110,17 @@ public class ${table.entityName}Service extends BaseService<${table.entityName}M
     /**
      * 【4】删除--多个id以逗号分隔
      *
-     * @param {_sample}Ids
+     * @param ${table.entityName}Ids
      */
-    public void delete{_Sample}(String {_sample}Ids) {
-        log.info("【删除--{table.comment}{}】", {_sample}Ids);
+    public void delete${table.entityName}(String ${table.entityName}Ids) {
+        log.info("【删除--${table.comment}{}】", ${table.entityName}Ids);
 
         // 【1】删除
-        String[] {_sample}IdArray = StrUtil.splitToArray({_sample}Ids, ",");
-        for (String {_sample}Id : {_sample}IdArray) {
-            this.removeById({_sample}Id);
+        String[] ${table.entityName}IdArray = StrUtil.splitToArray(${table.entityName}Ids, ",");
+        for (String ${table.entityName}Id : ${table.entityName}IdArray) {
+            this.removeById(${table.entityName}Id);
         }
     }
 
-    /************* 【上面代码是基本的CRUD功能，新增的方法放在下面！Private方法放最底下】 *********************************************************************************************/
-
-    /**
-     * 【5】检查{_sample}Id是否存在
-     *
-     * @param {_sample}Id
-     * @return
-     */
-    private boolean isExist{_Sample}Id(String {_sample}Id) {
-        return this.getById({_sample}Id) != null;
-    }
-
-    /**
-     * 【6】主键查询同时控制数据权限
-     * @param id 主键
-     * @return
-     */
-    public ${table.entityName}Vo get(String id) {
-        log.info("【list查询条件--{table.comment}.id={}】", id);
-
-        // 【1】 处理查询条件
-        ${table.entityName}Dto4List dto = new ${table.entityName}Dto4List();
-        dto.setId(id);
-
-        // 【2】 数据权限查询条件（需要时去掉注释，复杂的场景另需调整Mapper.xml中的SQL，注意表别名不要重复）
-        /*
-        dto = getDataAuthFliter(
-                dto,                                //实现DataAuthFilter接口的DTO类实例
-                getBizTableName(),                  //业务表名
-                "a",                                //业务表别名，注意不要与其他JOIN的表别名重复
-                "ORG_ID",                           //业务表【机构ID】字段名
-                "CREATE_USER_ID",                   //业务表【用户ID】字段名
-                "T_SYS_ORG",                        //机构表名
-                "da",                               //机构表别名，注意不要与其他JOIN的表别名重复
-                "ORG_ID",                           //机构表【机构ID】字段名
-                "ORG_LEVEL_CODE"                    //机构表【机构层次代码】字段名
-        );
-        log.debug("dataAuthJoinSql=\n{}", dto.getDataAuthJoinSql());
-        log.debug("dataAuthFilterSql=\n{}", dto.getDataAuthFilterSql());
-        */
-
-        List<${table.entityName}Vo> list = this.getBaseMapper().get${table.entityName}List(dto);
-        if (!list.isEmpty()) {
-            return list.get(0);
-        }
-        return null;
-    }
 
 }

@@ -56,8 +56,9 @@ public class GeneratorJyb {
                 })
                 .strategyConfig(builder -> {
                     builder.serviceBuilder().convertServiceFileName((entityName -> entityName + ConstVal.SERVICE))
-                            .entityBuilder().enableActiveRecord().enableLombok().enableChainModel()
-                            .logicDeleteColumnName("IS_DELETE")
+
+                            .entityBuilder().enableActiveRecord().enableLombok().enableChainModel().logicDeleteColumnName("IS_DELETE")
+
                     ;
                 })
                 .strategyConfig(builder -> {
@@ -73,6 +74,7 @@ public class GeneratorJyb {
                 .templateConfig(builder -> {
                         builder.controller("templateJyb/controller.java.vm");
                         builder.serviceImpl("templateJyb/serviceImpl.java.vm");
+                        builder.entity("templateJyb/entity.java.vm");
                         builder.mapper("templateJyb/mapper.java.vm");
                         builder.xml("templateJyb/mapper.xml.vm");
                     }
